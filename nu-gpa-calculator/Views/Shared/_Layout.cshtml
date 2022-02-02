@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - nu_gpa_calculator</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body onload="handlePageLoad()">
+    <div class="header">
+        <div class="header-wrapper">
+            <span id="header-text">NU GPA Calculator</span>
+        </div>
+    </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <div class="footer">
+        <div id="footer-item">
+            <a href="https://github.com/Nursatdeveloper/GPA-calculator">
+                View source code
+            </a>
+        </div>
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

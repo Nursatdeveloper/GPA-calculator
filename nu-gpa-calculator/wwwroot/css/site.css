@@ -1,0 +1,299 @@
+﻿.header {
+    position: fixed;
+    z-index: 3;
+    right: 0;
+    left: 0;
+    top: 0;
+    height: 60px;
+    background-color: white;
+    -webkit-box-shadow: 0px 5px 8px -2px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 5px 8px -2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 5px 8px -2px rgba(34, 60, 80, 0.2);
+}
+
+.header-wrapper {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+#header-text {
+    font-size: 22px;
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Verdana', 'sans-serif';
+    color: #4d4d4d;
+}
+
+.container {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Verdana', 'sans-serif';
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.bold {
+    font-weight: 600;
+    color: #4d4d4d;
+}
+
+.add-course-component {
+    margin-top: 30px;
+}
+
+.add-course-form {
+    position: relative;
+    width: 95%;
+}
+
+#source-code-link {
+    position: absolute;
+    right: 10px;
+    font-size: 14px;
+}
+
+.course-list-component {
+    margin-top: 20px;
+}
+
+.course-list-item {
+    border: 1px solid gray;
+    display: flex;
+    width: 93%;
+    padding: 7px;
+    margin-top: 5px;
+    background-color: #cccccc;
+    position: relative;
+}
+
+.course-list-item-number {
+    width: 5%;
+    margin-left: 5px;
+}
+
+.course-list-item-name {
+    width: fit-content;
+}
+
+.course-list-item-options {
+    width: fit-content;
+    position: absolute;
+    right: 10px;
+    display: flex;
+}
+
+.remove-btn {
+    margin-left: 30px;
+}
+
+    .remove-btn:hover {
+        background-color: red;
+        color: white;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+.gpa-calculator-component {
+    margin-top: 30px;
+    border: 1px solid gray;
+    width: 93%;
+    padding: 7px;
+    margin-bottom: 100px;
+}
+
+.gpa-calculator-header {
+    padding: 5px;
+    position: relative;
+}
+
+.gpa-calculator-body {
+    padding: 5px;
+}
+
+.gpa-calculator-section {
+    font-size: 14px;
+    position: relative;
+    width: 270px;
+    margin-bottom: 2px;
+    margin-left: 10px;
+}
+
+    .gpa-calculator-section input {
+        width: 50px;
+        position: absolute;
+        right: 35px;
+    }
+
+    .gpa-calculator-section span {
+        position: absolute;
+        right: 0;
+        top: 3px;
+        cursor: pointer;
+    }
+
+        .gpa-calculator-section span svg:hover {
+            color: red;
+        }
+
+#add-new-category-input {
+    width: 100px;
+}
+
+.add-new-category-btn span {
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.short-input {
+    width: 50px;
+}
+
+.margin-b-5 {
+    margin-bottom: 5px;
+}
+
+.mid-exam-item {
+    margin-left: 10px;
+}
+
+.alert-message {
+    background-color: #ff6666;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 290px;
+    font-size: 12px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+    .alert-message svg {
+        position: absolute;
+        right: 10px;
+    }
+
+        .alert-message svg:hover {
+            color: white;
+            cursor: pointer;
+        }
+
+.row {
+    display: flex;
+    width: fit-content;
+    font-size: 16px;
+}
+
+.col-long {
+    width: 180px;
+    padding-left: 40px;
+}
+
+.col-short {
+    padding-left: 20px;
+}
+
+.mid-exam-wrapper {
+    display: flex;
+}
+
+.mid-exam-checkbox-container {
+    margin-left: 30px;
+}
+
+    .mid-exam-checkbox-container input {
+        width: 20px;
+    }
+
+.input-tiny {
+    width: 20px;
+}
+
+.quiz-drop {
+    margin-left: 45px;
+}
+
+.lab-checkbox-container {
+    margin-left: 60px;
+}
+
+.lab-checkbox-header {
+    margin-left: -45px;
+}
+
+.assignment-checkbox-header {
+    margin-left: 10px;
+}
+
+.margin-t-20 {
+    margin-top: 20px;
+}
+
+.font-s-14 {
+    font-size: 14px;
+}
+
+#calc-gpa-btn {
+    height: 30px;
+    background-color: #0033cc;
+    color: white;
+    border-radius: 3px;
+    margin-top: 20px;
+    margin-left:10px;
+}
+
+    #calc-gpa-btn:hover {
+        background-color: #002699;
+        cursor: pointer;
+        border-radius: 3px;
+    }
+
+.display-none {
+    display: none;
+}
+
+.alert {
+    width: fit-content;
+    background-color: #ff6666;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 5px;
+}
+#reset-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #2eb82e;
+    height: 30px;
+    color: white;
+    border-radius: 3px;
+}
+    #reset-btn:hover {
+        background-color: #248f24;
+        border-radius: 3px;
+    }
+.total-information{
+    margin-left:10px;
+}
+#footer-item{
+    width:fit-content;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:15px;
+}
+    #footer-item a {
+        color: #4d4d4d;
+    }
+.footer {
+    position: fixed;
+    height: 50px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: white;
+    -webkit-box-shadow: 0px -4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px -4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px -4px 8px 0px rgba(34, 60, 80, 0.2);
+}

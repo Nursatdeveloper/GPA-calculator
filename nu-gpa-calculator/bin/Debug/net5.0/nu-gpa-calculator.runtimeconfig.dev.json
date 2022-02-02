@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Nursat\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Nursat\\.nuget\\packages"
+    ]
+  }
+}

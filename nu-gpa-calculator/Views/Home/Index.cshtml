@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "NU GPA Calculator";
+}
+
+    <div class="add-course-component">
+        <div class="bold">Add Course</div>
+        <div class="add-course-form">
+            <label>Course name:</label>
+            <input type="text" id="course-name" />
+            <button onclick="handleAddCourse()">Add</button>
+            <a id="source-code-link" href="https://github.com/Nursatdeveloper/GPA-calculator">View source code</a>
+        </div>
+    </div>
+    <div class="course-list-component">
+        <div class="bold">Course list</div>
+        <div class="course-list-wrapper">
+
+        </div>
+    </div>
+    <div class="gpa-calculator-component">
+        <div class="gpa-calculator-header">
+            <span class="bold">Course: </span>
+            <span id="gpa-calculator-course-title"></span>
+        </div>
+        <hr />
+        <div class="gpa-calculator-body">
+            <div class="bold">Select percentages</div>
+            <div class="gpa-calculator-section">
+                <label class="bold">Final exams:</label>
+                <input onchange="handlePercentageChange(this)" type="text" id="final-exam-weight" />
+            </div>
+            <div class="gpa-calculator-section">
+                <label class="bold">Mid-term exams:</label>
+                <input onchange="handlePercentageChange(this)" type="text" id="mid-exam-weight" />
+            </div>
+            <div class="gpa-calculator-section">
+                <label class="bold">Weekly quizzes:</label>
+                <input onchange="handlePercentageChange(this)" type="text" id="quiz-weight" />
+            </div>
+            <div class="additional-categories">
+
+            </div>
+            <div class="gpa-calculator-section">
+                <label class="bold">Total:</label>
+                <input type="text" id="total-percent" value="0" />
+                <span>/100</span>
+            </div>
+        </div>
+        <div class="add-new-category-btn">
+            <button id="add-lab-btn" onclick="handleAddNewCategory('Labs')">Add Labs</button>
+            <button id="add-assignment-btn" onclick="handleAddNewCategory('Assignments')">Add Assignments</button>
+            <button id="add-participation-btn" onclick="handleAddNewCategory('Participation')">Add Participation</button>
+        </div>
+        <hr />
+        <div class="final-exam-calculator">
+            <div>
+                <span class="bold">Final exam</span>
+            </div>
+            <div class="margin-b-5">
+                <span>The percentage of correct answers out of 100%</span>
+                <input type="text" class="short-input" id="final-exam-percentage" />
+                <span id="final-exam-percentage-alert" class="alert">This field is required</span>
+            </div>
+        </div>
+        <div class="mid-term-calculator margin-t-20">
+            <div>
+                <span class="bold">Mid-term exam</span>
+            </div>
+            <div class="margin-b-5">
+                <span>Total number of mid-term exams</span>
+                <input onchange="handleMidExamNumberChange(this)" type="text" id="mid-exam-number" class="short-input" />
+                <span id="mid-exam-number-alert" class="alert">This field is required</span>
+                <br />
+            </div>
+            <div class="mid-exams-container">
+                <!--Data from jquery-->
+            </div>
+        </div>
+        <div class="weekly-quizzes-calculator margin-t-20">
+            <div>
+                <span class="bold">Weekly quizzes</span>
+            </div>
+            <div class="margin-b-5">
+                <span>Total number of Weekly quizzes</span>
+                <input onchange="handleWeeklyQuizNumberChange(this)" type="text" id="weekly-quiz-number" class="short-input" />
+                <span id="quiz-number-alert" class="alert">This field is required</span><br />
+            </div>
+            <div class="weekly-quizzes-container">
+
+            </div>
+        </div>
+        <div class="category-items">
+
+        </div>
+        <button id="calc-gpa-btn" onclick="calculateGpa()">Calculate GPA</button>
+
+
+    </div>
+
