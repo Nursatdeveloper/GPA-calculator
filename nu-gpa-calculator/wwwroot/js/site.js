@@ -230,7 +230,7 @@ function handleAssignmentNumberChange(elem){
         `);
         $(".assignment-droppable").append(`
             <div class="lab-checkbox-container">
-                <input id="assignment-drop-${i+1}" value="${i+1}" type="checkbox"/>
+                <input id="assignment-drop-${i+1}" value="${i+1}" class="form-checkbox" type="checkbox"/>
             </div>
         `)
     }
@@ -275,7 +275,7 @@ function handleLabNumberChange(elem){
         `);
         $(".lab-droppable").append(`
             <div class="lab-checkbox-container">
-                <input id="lab-drop-${i+1}" value="${i+1}" type="checkbox"/>
+                <input id="lab-drop-${i+1}" value="${i+1}" class="form-checkbox" type="checkbox"/>
             </div>
         `)
     }
@@ -320,7 +320,7 @@ function handleMidExamNumberChange(elem){
         `);
         $(".mid-exam-droppable").append(`
             <div class="mid-exam-checkbox-container">
-                <input value="${i+1}" id="mid-drop-${i+1}" type="checkbox"/>
+                <input value="${i+1}" id="mid-drop-${i+1}" class="form-checkbox" type="checkbox"/>
             </div>
         `)
     }
@@ -367,7 +367,7 @@ function handleWeeklyQuizNumberChange(elem){
         `);
         $(".quiz-drop").append(`
             <div class="mid-exam-checkbox-container">
-                <input id="quiz-drop-${i+1}" value="${i+1}" type="checkbox"/>
+                <input id="quiz-drop-${i+1}" value="${i+1}" class="form-checkbox" type="checkbox"/>
             </div>
         `)
     }
@@ -434,7 +434,6 @@ function calculateGpa(){
     //FINAL EXAM
     var finalExamPercentage = $("#final-exam-percentage").val();
     if(finalExamPercentage == ''){
-        console.log("is required")
         $("#final-exam-percentage-alert").show();   
         setTimeout(function(){
             $("#final-exam-percentage-alert").hide()
@@ -466,7 +465,7 @@ function calculateGpa(){
         examWeights[2][2] = calculateQuiz(quizWeight);
     }
 
-    console.log(examWeights);
+
     $(".gpa-calculator-component").append(`
         <div class="total-information">
             <hr/>
@@ -480,8 +479,7 @@ function calculateGpa(){
     for(var i = 0; i < examWeights.length; i++){
         result += examWeights[i][2];
         if(i > 2){
-            console.log("salam")
-            $(".total-information").append(`
+                $(".total-information").append(`
                 <span class="font-s-14">${examWeights[i][0]}</span><span class="font-s-14" >${round(examWeights[i][2],2)}/${examWeights[i][1]}</span><br/>
             `)
         }
@@ -496,11 +494,16 @@ function calculateGpa(){
             <span class="font-s-14 bold">Percentage: </span><span class="font-s-14" >${round(result, 2)}</span><br/>
             <span class="font-s-14 bold">GPA: </span><span class="font-s-14" >${data[1]}</span><br/>
             <span class="font-s-14 bold">Grade: </span><span class="font-s-14" >${data[0]}</span><br/>
+            <button id="reset-btn" onclick="resetFields()">Reset</button>
         `)
         }
     })
 
 
+}
+function resetFields(){
+    $("input").val('');
+    $(".total-information").hide();
 }
 function round(value, decimals) {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
