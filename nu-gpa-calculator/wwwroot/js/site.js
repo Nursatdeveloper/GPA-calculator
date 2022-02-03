@@ -1,8 +1,4 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-function handlePageLoad() {
+﻿function handlePageLoad(){
 
     $("#final-exam-percentage-alert").hide();
     $("#mid-exam-number-alert").hide();
@@ -10,26 +6,26 @@ function handlePageLoad() {
     $(".gpa-calculator-component").hide();
 
     var courseList = JSON.parse(localStorage.getItem("courseList"));
-    for (var i = 1; i <= courseList.length; i++) {
-        addCourseToCourseListComponent(i, courseList[i - 1])
+    for(var i = 1; i <= courseList.length; i++){
+        addCourseToCourseListComponent(i, courseList[i-1])
     }
     var categories = JSON.parse(localStorage.getItem("categories"))
-    if (categories != null) {
+    if(categories != null){
         localStorage.removeItem("categories");
     }
 
 }
 
-function handleAddCourse() {
+function handleAddCourse(){
     var courseName = $("#course-name").val();
     var courses = JSON.parse(localStorage.getItem("courseList"));
-    if (courses == null) {
+    if(courses == null){
         var courseList = [];
         courseList[0] = courseName;
         localStorage.setItem("courseList", JSON.stringify(courseList));
-        addCourseToCourseListComponent(1, courseName)
+        addCourseToCourseListComponent(0, courseName)
     }
-    else {
+    else{
         var courseList = JSON.parse(localStorage.getItem("courseList"));
         courseList[courseList.length] = courseName;
         localStorage.setItem("courseList", JSON.stringify(courseList));
@@ -37,7 +33,7 @@ function handleAddCourse() {
     }
     $("#course-name").val('');
 }
-function addCourseToCourseListComponent(number, courseName) {
+function addCourseToCourseListComponent(number, courseName){
     $(".course-list-wrapper").append(`
     <div class="course-list-item">
         <div class="course-list-item-number">
@@ -48,17 +44,17 @@ function addCourseToCourseListComponent(number, courseName) {
         </div>
         <div class="course-list-item-options">
             <button class="link" value="${courseName}" onclick="showGpaCalcForm(this)">Calculate GPA</button>
-            <button class="remove-btn"' onclick="handleRemoveCourse(${number - 1})">Remove </button>
+            <button class="remove-btn"' onclick="handleRemoveCourse(${number-1})">Remove </button>
         </div>
     </div>
     `)
 }
-function showGpaCalcForm(elem) {
+function showGpaCalcForm(elem){
     $(".gpa-calculator-component").toggle();
     $("#gpa-calculator-course-title").text(elem.value);
 }
 
-function handleRemoveCourse(index) {
+function handleRemoveCourse(index){
     var courseList = JSON.parse(localStorage.getItem("courseList"));
     var newCourseList = courseList.filter(item => item != courseList[index]);
     localStorage.setItem("courseList", JSON.stringify(newCourseList));
@@ -66,24 +62,24 @@ function handleRemoveCourse(index) {
     handlePageLoad();
 }
 
-function handleAddNewCategory(name) {
-    var categories = JSON.parse(localStorage.getItem("categories"));
+function handleAddNewCategory(name){
+    var categories = JSON.parse(localStorage.getItem("categories"));  
     var index = 0;
-    if (categories == null) {
+    if(categories == null){
         index = 0;
         var category = [];
         category[0] = name;
-        localStorage.setItem("categories", JSON.stringify(category));
+        localStorage.setItem("categories",JSON.stringify(category));
     }
-    else if (categories.length == 0) {
+    else if(categories.length == 0){
         categories[0] = name;
-        localStorage.setItem("categories", JSON.stringify(categories));
+        localStorage.setItem("categories",JSON.stringify(categories));
     }
-    else {
+    else{
         index = categories.length;
         categories[index] = name;
-        localStorage.setItem("categories", JSON.stringify(categories));
-    }
+        localStorage.setItem("categories",JSON.stringify(categories));
+    } 
     $(".additional-categories").append(`
         <div id="category-${index}" class="gpa-calculator-section">
             <label class="bold">${name}:</label>
@@ -96,15 +92,15 @@ function handleAddNewCategory(name) {
             </span>
         </div>
     `);
-    if (name == 'Labs') {
+    if(name == 'Labs'){
         addLabCategoryComponent(index)
-    } else if (name == 'Assignments') {
+    }else if(name == 'Assignments'){
         addAssignmentCategoryComponent(index);
-    } else if (name == 'Participation') {
+    }else if(name == 'Participation'){
         addParticipationCategoryComponent(index);
     }
 }
-function addParticipationCategoryComponent(index) {
+function addParticipationCategoryComponent(index){
     $(".category-items").append(`
     <div id="category-item-${index}" class="labs-calculator margin-t-20">
         <div>
@@ -117,7 +113,7 @@ function addParticipationCategoryComponent(index) {
     </div>
 `)
 }
-function addLabCategoryComponent(index) {
+function addLabCategoryComponent(index){
     $(".category-items").append(`
         <div id="category-item-${index}" class="labs-calculator margin-t-20">
             <div>
@@ -133,7 +129,7 @@ function addLabCategoryComponent(index) {
         </div>
     `)
 }
-function addAssignmentCategoryComponent(index) {
+function addAssignmentCategoryComponent(index){
     $(".category-items").append(`
     <div id="category-item-${index}" class="assignment-calculator margin-t-20">
         <div>
@@ -150,13 +146,13 @@ function addAssignmentCategoryComponent(index) {
 `)
 }
 
-function handleRemoveCategory(index) {
+function handleRemoveCategory(index){
     var categories = JSON.parse(localStorage.getItem("categories"));
-    if (categories.length == 1) {
+    if(categories.length == 1){
         var newArray = [];
         localStorage.setItem("categories", JSON.stringify(newArray));
     }
-    else {
+    else{
         var newCategories = categories.filter(elem => elem != categories[index])
         localStorage.setItem("categories", JSON.stringify(newCategories));
     }
@@ -164,13 +160,38 @@ function handleRemoveCategory(index) {
     $(`#category-${index}`).remove();
 }
 
-function handlePercentageChange(elem) {
-    var percent = parseInt(elem.value);
-    var total = parseInt($("#total-percent").val());
-    total += percent;
-    $("#total-percent").val(total);
+function handlePercentageChange(elem){
+    var finalExamWeight = $("#final-exam-weight").val()
+    if(finalExamWeight == ''){
+        finalExamWeight = 0;
+    }
+    var midExamWeight = $("#mid-exam-weight").val()
+    if(midExamWeight == ''){
+        midExamWeight = 0;
+    }
+    var quizWeight = $("#quiz-weight").val()
+    if(quizWeight == ''){
+        quizWeight = 0;
+    }
+
+    var totalExamWeight = parseInt(finalExamWeight) + parseInt(midExamWeight) + parseInt(quizWeight);
+    var categories = JSON.parse(localStorage.getItem("categories"));
+    if(categories != null && categories.length != 0){
+        for(var i = 0; i < categories.length; i++){
+            var addedCategoryWeight =$(`#${categories[i]}`).val();
+            if(addedCategoryWeight != ''){
+                
+                totalExamWeight += parseInt(addedCategoryWeight);
+            }
+        }
+    }
+    $("#total-percent").val(totalExamWeight);
+    if(totalExamWeight > 100){
+        alert("Total percentage cannot be more than 100%, idiot!");
+    }
+    
 }
-function handleAssignmentNumberChange(elem) {
+function handleAssignmentNumberChange(elem){
     var number = elem.value;
     $(".assignment-container").append(`
         <div class="alert-message-assignment alert-message">
@@ -199,22 +220,22 @@ function handleAssignmentNumberChange(elem) {
             </div>
         </div>
     `)
-    for (var i = 0; i < number; i++) {
+    for(var i = 0; i < number; i++){
         $(".assignment-list").append(`
             <div  class="mid-exam-item">
-                <span>Assignment ${i + 1}</span>
-                <input class="short-input" id="assignment-${i + 1}" type="text"/>
+                <span>Assignment ${i+1}</span>
+                <input class="short-input" id="assignment-${i+1}" type="text"/>
             </div>
         `);
         $(".assignment-droppable").append(`
             <div class="lab-checkbox-container">
-                <input id="assignment-drop-${i + 1}" value="${i + 1}" type="checkbox"/>
+                <input id="assignment-drop-${i+1}" value="${i+1}" type="checkbox"/>
             </div>
         `)
     }
     localStorage.setItem("assignments", number);
 }
-function handleLabNumberChange(elem) {
+function handleLabNumberChange(elem){
     var labNumber = elem.value;
     $(".labs-container").append(`
         <div class="alert-message-lab alert-message">
@@ -243,22 +264,22 @@ function handleLabNumberChange(elem) {
             </div>
         </div>
     `);
-    for (var i = 0; i < labNumber; i++) {
+    for(var i = 0; i < labNumber; i++){
         $(".lab-list").append(`
             <div  class="mid-exam-item">
-                <span>Lab ${i + 1}</span>
-                <input class="short-input" id="lab-${i + 1}" type="text"/>
+                <span>Lab ${i+1}</span>
+                <input class="short-input" id="lab-${i+1}" type="text"/>
             </div>
         `);
         $(".lab-droppable").append(`
             <div class="lab-checkbox-container">
-                <input id="lab-drop-${i + 1}" value="${i + 1}" type="checkbox"/>
+                <input id="lab-drop-${i+1}" value="${i+1}" type="checkbox"/>
             </div>
         `)
     }
     localStorage.setItem("labs", labNumber);
 }
-function handleMidExamNumberChange(elem) {
+function handleMidExamNumberChange(elem){
     var number = parseInt(elem.value);
     $(".mid-exams-container").append(`
         <div class="alert-message-mid-exam alert-message">
@@ -287,22 +308,22 @@ function handleMidExamNumberChange(elem) {
             </div>
         </div>
     `)
-    for (var i = 0; i < number; i++) {
+    for(var i = 0; i < number; i++){
         $(".mid-exam-list").append(`
             <div class="mid-exam-item">
-                <span>Mid-term exam ${i + 1}</span>
-                <input class="short-input" type="text" id="mid-exam-${i + 1}"/>
+                <span>Mid-term exam ${i+1}</span>
+                <input class="short-input" type="text" id="mid-exam-${i+1}"/>
             </div>
         `);
         $(".mid-exam-droppable").append(`
             <div class="mid-exam-checkbox-container">
-                <input value="${i + 1}" id="mid-drop-${i + 1}" type="checkbox"/>
+                <input value="${i+1}" id="mid-drop-${i+1}" type="checkbox"/>
             </div>
         `)
     }
     localStorage.setItem("midExams", number);
 }
-function handleWeeklyQuizNumberChange(elem) {
+function handleWeeklyQuizNumberChange(elem){
     var number = parseInt(elem.value);
     $(".weekly-quizzes-container").append(`
         <div class="alert-message-quiz alert-message">
@@ -331,43 +352,43 @@ function handleWeeklyQuizNumberChange(elem) {
             </div>
         </div>
     `)
-    for (var i = 0; i < number; i++) {
+    for(var i = 0; i < number; i++){
         $(".quiz-list").append(`
-            <div id="quiz-${i + 1}" class="mid-exam-item">
-                <span>Quiz ${i + 1}</span>
-                <input id="score-${i + 1}" type="text" class="input-tiny"/>
+            <div id="quiz-${i+1}" class="mid-exam-item">
+                <span>Quiz ${i+1}</span>
+                <input id="score-${i+1}" type="text" class="input-tiny"/>
                 <span>/</span>
-                <input id="max-${i + 1}" type="text" class="input-tiny"/>
+                <input id="max-${i+1}" type="text" class="input-tiny"/>
             </div>
         `);
         $(".quiz-drop").append(`
             <div class="mid-exam-checkbox-container">
-                <input id="quiz-drop-${i + 1}" value="${i + 1}" type="checkbox"/>
+                <input id="quiz-drop-${i+1}" value="${i+1}" type="checkbox"/>
             </div>
         `)
     }
     localStorage.setItem("quiz", number);
 }
-function handleCategoryItemNumberChange(elem) {
+function handleCategoryItemNumberChange(elem){
     var number = parseInt(elem.value);
 }
-function hideAlertMessage() {
+function hideAlertMessage(){
     $(".alert-message").hide();
 }
-function hideAlertMessageAssignment() {
+function hideAlertMessageAssignment(){
     $(".alert-message-assignment").hide();
 }
-function hideAlertMessageLab() {
+function hideAlertMessageLab(){
     $(".alert-message-lab").hide();
 }
-function hideAlertMessageMidExam() {
+function hideAlertMessageMidExam(){
     $(".alert-message-mid-exam").hide();
 }
-function hideAlertMessageQuiz() {
+function hideAlertMessageQuiz(){
     $(".alert-message-quiz").hide();
 }
 
-function calculateGpa() {
+function calculateGpa(){
     var examWeights = []
 
     var finalExamWeight = $("#final-exam-weight").val();
@@ -384,23 +405,23 @@ function calculateGpa() {
 
     var totalPercentage = finalExamWeight + midExamWeight + quizWeight;
     var addedCategories = JSON.parse(localStorage.getItem("categories"));
-    if (addedCategories == null || addedCategories.length == 0) {
-
-        if (totalPercentage != 100) {
-            return alert("The sum of exam percentages must be 100%")
+    if(addedCategories == null || addedCategories.length == 0){
+        
+        if(totalPercentage != 100){
+            return alert("The sum of all exams must be 100%!");
         }
-    } else {
-        for (var i = 0; i < addedCategories.length; i++) {
+    }else{
+        for(var i = 0; i < addedCategories.length; i++){
             var value = $(`#${addedCategories[i]}`).val();
             var array = [addedCategories[i], value]
             examWeights.push(array)
-            if (addedCategories[i] == 'Labs') {
-                examWeights[i + 3][2] = calculateLabs(value);
-            } else if (addedCategories[i] == 'Assignments') {
-                examWeights[i + 3][2] = calculateAssignments(value);
-            } else {
+            if(addedCategories[i] == 'Labs'){
+                examWeights[i+3][2] = calculateLabs(value);
+            }else if(addedCategories[i] == 'Assignments'){
+                examWeights[i+3][2] = calculateAssignments(value);
+            }else{
                 var participation = $("#participation-percentage").val();
-                examWeights[i + 3][2] = (participation * value) / 100
+                examWeights[i+3][2] = (participation * value)/100
             }
         }
     }
@@ -408,36 +429,36 @@ function calculateGpa() {
 
     //FINAL EXAM
     var finalExamPercentage = $("#final-exam-percentage").val();
-    if (finalExamPercentage == '') {
+    if(finalExamPercentage == ''){
         console.log("is required")
-        $("#final-exam-percentage-alert").show();
-        setTimeout(function () {
+        $("#final-exam-percentage-alert").show();   
+        setTimeout(function(){
             $("#final-exam-percentage-alert").hide()
         }, 3000);
-    } else {
-        var final = (finalExamPercentage * finalExamWeight) / 100;
+    }else{
+        var final = (finalExamPercentage*finalExamWeight)/100;
         examWeights[0][2] = final;
     }
 
     //MID-TERM EXAM
     var midExamNumber = $("#mid-exam-number").val();
-    if (midExamNumber == '') {
-        $("#mid-exam-number-alert").show();
-        setTimeout(function () {
+    if(midExamNumber == ''){
+        $("#mid-exam-number-alert").show();   
+        setTimeout(function(){
             $("#mid-exam-number-alert").hide();
         }, 3000);
-    } else {
+    }else{
         examWeights[1][2] = calculateMidTerm(midExamWeight);
     }
 
     //WEEKLY QUIZZES
     var quizNumber = $("#weekly-quiz-number").val();
-    if (quizNumber == '') {
-        $("#quiz-number-alert").show();
-        setTimeout(function () {
+    if(quizNumber == ''){
+        $("#quiz-number-alert").show();   
+        setTimeout(function(){
             $("#quiz-number-alert").hide();
         }, 3000);
-    } else {
+    }else{
         examWeights[2][2] = calculateQuiz(quizWeight);
     }
 
@@ -447,53 +468,47 @@ function calculateGpa() {
             <hr/>
             <span class="bold">Result</span><br/>
             <span class="font-s-14">Final exam:</span><span class="font-s-14" id="final-exam-result">${round(examWeights[0][2], 2)}/${examWeights[0][1]}</span><br/>
-            <span class="font-s-14">Mid-term exam:</span><span class="font-s-14" id="mid-exam-result">${round(examWeights[1][2], 2)}/${examWeights[1][1]}</span><br/>
-            <span class="font-s-14">Weekly quizzes:</span><span class="font-s-14" id="quiz-result">${round(examWeights[2][2], 2)}/${examWeights[2][1]}</span><br/>
+            <span class="font-s-14">Mid-term exam:</span><span class="font-s-14" id="mid-exam-result">${round(examWeights[1][2],2)}/${examWeights[1][1]}</span><br/>
+            <span class="font-s-14">Weekly quizzes:</span><span class="font-s-14" id="quiz-result">${round(examWeights[2][2],2)}/${examWeights[2][1]}</span><br/>
         </div>
     `)
     var result = 0
-    for (var i = 0; i < examWeights.length; i++) {
+    for(var i = 0; i < examWeights.length; i++){
         result += examWeights[i][2];
-        if (i > 2) {
+        if(i > 2){
+            console.log("salam")
             $(".total-information").append(`
-                <span class="font-s-14">${examWeights[i][0]}</span><span class="font-s-14" >${round(examWeights[i][2], 2)}/${examWeights[i][1]}</span><br/>
+                <span class="font-s-14">${examWeights[i][0]}</span><span class="font-s-14" >${round(examWeights[i][2],2)}/${examWeights[i][1]}</span><br/>
             `)
         }
     }
     $.ajax({
-        type: "POST",
-        url: "/Home/CalculateGpa",
-        data: {
-            'percentage': round(result, 0)
-        },
-        cache: false,
-        success: function (data) {
+        url:"/Home/CalculateGpa",
+        type:"POST",
+        data:{'percentage': round(result, 0)},
+        cache:false,
+        success: function(data){
             $(".total-information").append(`
-                <span class="font-s-14 bold">Percentage: </span><span class="font-s-14" >${round(result, 2)}</span><br/>
-                <span class="font-s-14 bold">GPA: </span><span class="font-s-14" >${data[1]}</span><br/>
-                <span class="font-s-14 bold">Grade: </span><span class="font-s-14" >${data[0]}</span><br/>
-                <button id="reset-btn" onclick="resetInputFields()">Close</button>
-            `)
+            <span class="font-s-14 bold">Percentage: </span><span class="font-s-14" >${round(result, 2)}</span><br/>
+            <span class="font-s-14 bold">GPA: </span><span class="font-s-14" >${data[1]}</span><br/>
+            <span class="font-s-14 bold">Grade: </span><span class="font-s-14" >${data[0]}</span><br/>
+        `)
         }
     })
 
-}
-function resetInputFields() {
-    $("input[type=text]").val('');
-    $("input[type=checkbox]").prop("checked", false);
-    $(".total-information").hide();
+
 }
 function round(value, decimals) {
-    return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
 
-function calculateAssignments(assignmentWeight) {
+function calculateAssignments(assignmentWeight){
     var assignmentNumber = JSON.parse(localStorage.getItem("assignments"));
     var percentages = 0;
     var drop = 0;
     var dropNum = 0
-    for (var i = 1; i <= assignmentNumber; i++) {
-        if ($(`#assignment-drop-${i}`).is(":checked")) {
+    for(var i = 1; i <= assignmentNumber; i++){
+        if($(`#assignment-drop-${i}`).is(":checked")){
             drop = $(`#assignment-drop-${i}`).val();
             dropNum++;
             continue;
@@ -501,17 +516,17 @@ function calculateAssignments(assignmentWeight) {
         var percentage = parseInt($(`#assignment-${i}`).val());
         percentages += percentage;
     }
-    var assignments = (percentages * assignmentWeight) / ((assignmentNumber - dropNum) * 100);
+    var assignments = (percentages*assignmentWeight)/((assignmentNumber-dropNum)*100);
     localStorage.removeItem("assignments");
     return assignments;
 }
-function calculateLabs(labWeight) {
+function calculateLabs(labWeight){
     var labNumber = JSON.parse(localStorage.getItem("labs"));
     var percentages = 0;
     var drop = 0;
     var dropNum = 0
-    for (var i = 1; i <= labNumber; i++) {
-        if ($(`#lab-drop-${i}`).is(":checked")) {
+    for(var i = 1; i <= labNumber; i++){
+        if($(`#lab-drop-${i}`).is(":checked")){
             drop = $(`#lab-drop-${i}`).val();
             dropNum++;
             continue;
@@ -519,52 +534,52 @@ function calculateLabs(labWeight) {
         var percentage = parseInt($(`#lab-${i}`).val());
         percentages += percentage;
     }
-    var labs = (percentages * labWeight) / ((labNumber - dropNum) * 100);
+    var labs = (percentages*labWeight)/((labNumber-dropNum)*100);
     localStorage.removeItem("labs");
     return labs;
 }
-function calculateQuiz(quizWeight) {
+function calculateQuiz(quizWeight){
     var quizNumber = JSON.parse(localStorage.getItem("quiz"));
     var percentages = 0;
     var drop = 0;
     var dropNum = 0
-    for (var i = 1; i <= quizNumber; i++) {
-        if ($(`#quiz-drop-${i}`).is(":checked")) {
+    for(var i = 1; i <= quizNumber; i++){
+        if($(`#quiz-drop-${i}`).is(":checked")){
             drop = $(`#quiz-drop-${i}`).val();
             dropNum++;
             continue;
         }
         var score = parseInt($(`#score-${i}`).val());
         var maxScore = parseInt($(`#max-${i}`).val());
-
-        var percentage = (score / maxScore) * 100;
+        
+        var percentage = (score/maxScore)*100;
         percentages += percentage
     }
-    var quiz = (percentages * quizWeight) / ((quizNumber - dropNum) * 100);
+    var quiz = (percentages * quizWeight)/((quizNumber-dropNum)*100);
     localStorage.removeItem("quiz");
     return quiz;
 }
-function calculateMidTerm(midExamWeight) {
+function calculateMidTerm(midExamWeight){
     var midExams = JSON.parse(localStorage.getItem("midExams"));
     var midExamPercentages = [];
     var percentages = 0;
     var drop = 0;
     var dropNum = 0
-    for (var i = 1; i <= midExams; i++) {
-        if ($(`#mid-drop-${i}`).is(':checked')) {
+    for(var i = 1; i <= midExams; i++){
+        if($(`#mid-drop-${i}`).is(':checked')){
             drop = $(`#mid-drop-${i}`).val();
             dropNum++;
             continue;
         }
         var percentage = $(`#mid-exam-${i}`).val();
 
-        if (percentage == '') {
-        } else {
+        if(percentage == ''){
+        }else{
             percentages += parseInt(percentage);
             midExamPercentages.push(percentage);
         }
     }
-    var mid = (percentages * midExamWeight) / ((midExams - dropNum) * 100);
+    var mid = (percentages*midExamWeight)/((midExams-dropNum)*100);
     localStorage.removeItem("midExams");
     return mid;
 

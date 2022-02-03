@@ -44,7 +44,7 @@
 
 .add-course-form {
     position: relative;
-    width: 95%;
+    width: 100%;
 }
 
 #source-code-link {
@@ -68,8 +68,8 @@
 }
 
 .course-list-item-number {
-    width: 5%;
     margin-left: 5px;
+    margin-right: 5px;
 }
 
 .course-list-item-name {
@@ -115,7 +115,8 @@
     font-size: 14px;
     position: relative;
     width: 270px;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
+    margin-top: 5px;
     margin-left: 10px;
 }
 
@@ -144,6 +145,15 @@
     font-size: 14px;
     font-weight: 600;
     margin-left: 10px;
+}
+.add-new-category-btn{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+.add-category-btn{
+    width:30%;
+    margin-left:15px;
+    height:30px;
 }
 
 .short-input {
@@ -237,12 +247,18 @@
 }
 
 #calc-gpa-btn {
-    height: 30px;
+    right:10px;
+    height:35px;
     background-color: #0033cc;
-    color: white;
+    color:white;
     border-radius: 3px;
-    margin-top: 20px;
-    margin-left:10px;
+    margin-top:20px;
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:20px;
+    width:80%;
+    font-size:16px;
 }
 
     #calc-gpa-btn:hover {
@@ -264,9 +280,13 @@
 }
 #reset-btn {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     background-color: #2eb82e;
     height: 30px;
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    width:80%;
     color: white;
     border-radius: 3px;
 }
@@ -300,6 +320,15 @@
 
 @media screen and (max-width: 1000px) {
     .container {
-        width: 90%; /* The width is 100%, when the viewport is 800px or smaller */
+        width: 90%; 
+    }
+}
+@media screen and (max-width: 800px) {
+    .add-category-btn{
+        display: block;
+        width:80%;
+        margin-left:auto;
+        margin-right:auto;
+        margin-top:10px;
     }
 }
