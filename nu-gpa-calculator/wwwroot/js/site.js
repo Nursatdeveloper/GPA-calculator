@@ -506,6 +506,7 @@ function resetFields(){
     $("input").val('');
     $("input[type=checkbox]").prop("checked", false);
     $(".total-information").hide();
+    $(".alert-message").hide();
 }
 function round(value, decimals) {
     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
