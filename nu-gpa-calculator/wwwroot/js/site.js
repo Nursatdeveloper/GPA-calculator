@@ -193,6 +193,7 @@ function handlePercentageChange(elem){
 }
 function handleAssignmentNumberChange(elem){
     var number = elem.value;
+    $(".assignment-container").empty();
     $(".assignment-container").append(`
         <div class="alert-message-assignment alert-message">
             <span>Enter the percentage for each assignment</span>
@@ -237,6 +238,7 @@ function handleAssignmentNumberChange(elem){
 }
 function handleLabNumberChange(elem){
     var labNumber = elem.value;
+    $(".labs-container").empty();
     $(".labs-container").append(`
         <div class="alert-message-lab alert-message">
             <span>Enter the percentage for each lab</span>
@@ -281,6 +283,7 @@ function handleLabNumberChange(elem){
 }
 function handleMidExamNumberChange(elem){
     var number = parseInt(elem.value);
+    $(".mid-exams-container").empty();
     $(".mid-exams-container").append(`
         <div class="alert-message-mid-exam alert-message">
             <span>Enter the percentage of correct answers</span>
@@ -325,6 +328,7 @@ function handleMidExamNumberChange(elem){
 }
 function handleWeeklyQuizNumberChange(elem){
     var number = parseInt(elem.value);
+    $(".weekly-quizzes-container").empty();
     $(".weekly-quizzes-container").append(`
         <div class="alert-message-quiz alert-message">
             <span>Enter the number of correct answers</span>
