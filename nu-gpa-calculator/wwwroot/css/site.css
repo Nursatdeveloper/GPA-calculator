@@ -281,14 +281,14 @@
     width:fit-content;
     margin-left:auto;
     margin-right:auto;
-    margin-top:15px;
+    margin-top:10px;
 }
     #footer-item a {
         color: #4d4d4d;
     }
 .footer {
     position: fixed;
-    height: 50px;
+    height: 40px;
     left: 0px;
     right: 0px;
     bottom: 0px;
@@ -296,4 +296,10 @@
     -webkit-box-shadow: 0px -4px 8px 0px rgba(34, 60, 80, 0.2);
     -moz-box-shadow: 0px -4px 8px 0px rgba(34, 60, 80, 0.2);
     box-shadow: 0px -4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+@media screen and (max-width: 1000px) {
+    .container {
+        width: 90%; /* The width is 100%, when the viewport is 800px or smaller */
+    }
 }
