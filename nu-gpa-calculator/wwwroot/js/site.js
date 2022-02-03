@@ -494,6 +494,7 @@ function calculateGpa(){
             <span class="font-s-14 bold">Percentage: </span><span class="font-s-14" >${round(result, 2)}</span><br/>
             <span class="font-s-14 bold">GPA: </span><span class="font-s-14" >${data[1]}</span><br/>
             <span class="font-s-14 bold">Grade: </span><span class="font-s-14" >${data[0]}</span><br/>
+            <span class="bold">You must take into account curve, so it is possible that your Grade will be higher!</bold>
             <button id="reset-btn" onclick="resetFields()">Reset</button>
         `)
         }
@@ -503,6 +504,7 @@ function calculateGpa(){
 }
 function resetFields(){
     $("input").val('');
+    $("input[type=checkbox]").prop("checked", false);
     $(".total-information").hide();
 }
 function round(value, decimals) {
