@@ -395,22 +395,21 @@ function hideAlertMessageQuiz(){
 function calculateGpa(){
     var examWeights = []
 
-    var finalExamWeight = $("#final-exam-weight").val();
+    var finalExamWeight = parseInt($("#final-exam-weight").val());
     var finalExamArr = ["Final", finalExamWeight];
     examWeights.push(finalExamArr);
 
-    var midExamWeight = $("#mid-exam-weight").val();
+    var midExamWeight = parseInt($("#mid-exam-weight").val());
     var MidExamArr = ["Mid", midExamWeight];
     examWeights.push(MidExamArr);
 
-    var quizWeight = $("#quiz-weight").val();
+    var quizWeight = parseInt($("#quiz-weight").val());
     var quizArr = ["Quiz", quizWeight];
     examWeights.push(quizArr)
 
     var totalPercentage = finalExamWeight + midExamWeight + quizWeight;
     var addedCategories = JSON.parse(localStorage.getItem("categories"));
     if(addedCategories == null || addedCategories.length == 0){
-        
         if(totalPercentage != 100){
             return alert("The sum of all exams must be 100%!");
         }
