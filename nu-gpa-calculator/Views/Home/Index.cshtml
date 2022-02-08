@@ -2,97 +2,257 @@
     ViewData["Title"] = "NU GPA Calculator";
 }
 
-    <div class="add-course-component">
-        <div class="bold">Add Course</div>
-        <div class="add-course-form">
-            <label>Course name:</label>
-            <input type="text" id="course-name" />
-            <button onclick="handleAddCourse()">Add</button>
+<div id="add-course-component">
+    <div id="add-course-input-wrapper">
+        <label class="fw-700 fs-18">Add Course:</label>
+        <input class="width-40vw" type="text" id="add-course-input" placeholder="Example: CSCI 152" />
+        <button class="btn-main" onclick="addCourse()">Add</button>
+    </div>
+    <div class="error-message-container" id="add-course-component-error">
+        <span id="add-course-component-error-text">
+            error
+        </span>
+        <svg onclick="closeError('add-course-component-error')" class="close-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
+            <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
+        </svg>
+    </div>
+</div>
+
+<div id="course-list-component">
+
+</div>
+
+<div id="gpa-calculator-form-component">
+    <input type="hidden" id="is-gpa-calculator-form-rendered" value="false" />
+    <div class="pos-rel">
+        <div class="title">
+            <span class="fw-600 fs-18">GPA Calculator Form</span>
+            <button class="btn-none close-icon" onclick="reload()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
+                    <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
+                </svg>
+            </button>
         </div>
     </div>
-    <div class="course-list-component">
-        <div class="bold">Course list</div>
-        <div class="course-list-wrapper">
+    <div id="grading-categories-wrapper">
+        <div class="grading-categories-item" id="course-name-wrapper">
+            <span class="fw-600 fs-18">Course:</span>
+            <span class="fw-600 fs-18" id="course-title"></span>
+        </div>
+        <div id="grading-categories-weight">
+            <div id="grading-categories">
+                <div class="grading-categories-item">
+                    <span class="fw-600 fs-14">Specify exam, quiz, lab etc. weights of your course below!</span>
+                </div>
 
-        </div>
-    </div>
-    <div class="gpa-calculator-component">
-        <div class="gpa-calculator-header">
-            <span class="bold">Course: </span>
-            <span id="gpa-calculator-course-title"></span>
-        </div>
-        <hr />
-        <div class="gpa-calculator-body">
-            <div class="bold">Select percentages</div>
-            <div class="gpa-calculator-section">
-                <label class="bold">Final exams:</label>
-                <input onchange="handlePercentageChange(this)" type="text" id="final-exam-weight" />
-            </div>
-            <div class="gpa-calculator-section">
-                <label class="bold">Mid-term exams:</label>
-                <input onchange="handlePercentageChange(this)" type="text" id="mid-exam-weight" />
-            </div>
-            <div class="gpa-calculator-section">
-                <label class="bold">Weekly quizzes:</label>
-                <input onchange="handlePercentageChange(this)" type="text" id="quiz-weight" />
-            </div>
-            <div class="additional-categories">
+                <div class="grading-categories-item" id="final-exam">
+                    <label class="fs-18">Final exam </label>
+                    <select id="final-exam-weight">
+                        <option value="0">Select weight</option>
+                    </select>
+                    <button type="button" class="btn-none info-icon-container" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="If you do not have final exam but one mid-term with higher percentage, use final exam for that purpose.">
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn-none" onclick="removeCategory('final-exam')">
+                        <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="grading-categories-item" id="mid-exam">
+                    <label class="fs-18">Mid-term exams </label>
+                    <select id="mid-exam-weight">
+                        <option value="0">Select weight</option>
+                    </select>
+                    <button type="button" class="btn-none info-icon-container" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Specify weight of mid-term exams for this course.">
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn-none" onclick="removeCategory('mid-exam')">
+                        <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="grading-categories-item" id="quiz">
+                    <label class="fs-18">Quiz </label>
+                    <select id="quiz-weight">
+                        <option value="0">Select weight</option>
+                    </select>
+                    <button type="button" class="btn-none info-icon-container" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Specify weight of the quizzes for this course.">
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn-none" onclick="removeCategory('quiz')">
+                        <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="grading-categories-item" id="assignment">
+                    <label class="fs-18">Assignment </label>
+                    <select id="assignment-weight">
+                        <option value="0">Select weight</option>
+                    </select>
+                    <button type="button" class="btn-none info-icon-container" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Specify weight of the assignments for this course.">
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn-none" onclick="removeCategory('assignment')">
+                        <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="grading-categories-item" id="lab">
+                    <label class="fs-18">Lab </label>
+                    <select id="lab-weight">
+                        <option value="0">Select weight</option>
+                    </select>
+                    <button type="button" class="btn-none info-icon-container" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Specify weight of the lab works for this course.">
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn-none" onclick="removeCategory('lab')">
+                        <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="grading-categories-item" id="participation">
+                    <label class="fs-18">Participation </label>
+                    <select id="participation-weight">
+                        <option value="0">Select weight</option>
+                    </select>
+                    <button type="button" class="btn-none info-icon-container" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Specify weight of the participation for this course.">
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn-none" onclick="removeCategory('participation')">
+                        <svg class="delete-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg>
+                    </button>
+                </div>
+
 
             </div>
-            <div class="gpa-calculator-section">
-                <label class="bold">Total:</label>
-                <input type="text" id="total-percent" value="0" />
-                <span>/100</span>
+            <div id="grading-categories-options">
+                <button type="button" class="btn-category fs-14" onclick="renderCategory('final-exam', 'final-exam-weight', 40)">Add Final exam</button>
+                <button type="button" class="btn-category fs-14" onclick="renderCategory('mid-exam', 'mid-exam-weight', 40)">Add Mid-term exam</button>
+                <button type="button" class="btn-category fs-14" onclick="renderCategory('quiz', 'quiz-weight', 40)">Add Quiz</button>
+                <button type="button" class="btn-category fs-14" onclick="renderCategory('assignment', 'assignment-weight', 40)">Add Assignment</button>
+                <button type="button" class="btn-category fs-14" onclick="renderCategory('lab', 'lab-weight', 40)">Add Lab</button>
+                <button type="button" class="btn-category fs-14" onclick="renderCategory('participation', 'participation-weight', 20)">Add Participation</button>
+                <button type="button" class="btn-submit fs-14" onclick="renderCategoryPercentageInputs()">Next</button>
             </div>
         </div>
-        <div class="add-new-category-btn">
-                <button class="add-category-btn" id="add-lab-btn" onclick="handleAddNewCategory('Labs')">Add Labs</button>
-                <button class="add-category-btn" id="add-assignment-btn" onclick="handleAddNewCategory('Assignments')">Add Assignments</button>
-                <button class="add-category-btn" id="add-participation-btn" onclick="handleAddNewCategory('Participation')">Add Participation</button>
-        </div>
-        <hr />
-        <div class="final-exam-calculator">
-            <div>
-                <span class="bold">Final exam</span>
+        <div id="grading-categories-percentages">
+            <div class="grading-categories-item" style="border-top:1px solid #b3b3b3;">
+
             </div>
-            <div class="margin-b-5">
-                <span>The percentage of correct answers out of 100%</span>
-                <input type="text" class="short-input" id="final-exam-percentage" />
-                <span id="final-exam-percentage-alert" class="alert">This field is required</span>
+            <div class="grading-categories-item" id="final-exam-row">
+                <label class="fw-600 fs-18">Final exam percentage</label>
+                <input type="text" id="final-exam-percentage" class="input-short" onchange="removeWarning('final-exam')" />
+                <span>/100%</span>
             </div>
-        </div>
-        <div class="mid-term-calculator margin-t-20">
-            <div>
-                <span class="bold">Mid-term exam</span>
+            <div class="grading-categories-row mid-term-row" id="mid-exam-row">
+                <div class="long-col">
+                    <label class="fw-600 fs-18">Mid-term exam number</label>
+                    <input type="text" id="mid-exam-number" onchange="renderMidExamInputs()" class="input-short" />
+                </div>
+                <div id="mid-term-col-container" class="col-container">
+
+                </div>
             </div>
-            <div class="margin-b-5">
-                <span>Total number of mid-term exams</span>
-                <input onchange="handleMidExamNumberChange(this)" type="text" id="mid-exam-number" class="short-input" />
-                <span id="mid-exam-number-alert" class="alert">This field is required</span>
+            <div id="quiz-row" class="categories-row">
+                <div class="long-col">
+                    <label class="fw-600 fs-18">Quiz number</label>
+                    <input type="text" id="quiz-number" onchange="renderQuizInputs()" class="input-short" />
+                </div>
+                <div id="quiz-col-container" class="col-container">
+                    <div class="width-50" id="quiz-col-1">
+
+                    </div>
+                    <div class="width-50" id="quiz-col-2">
+
+                    </div>
+                </div>
+            </div>
+            <div id="assignment-row" class="categories-row mg-t-10">
+                <div class="long-col">
+                    <label class="fw-600 fs-18">Assignment number</label>
+                    <input type="text" id="assignment-number" onchange="renderAssignmentInputs()" class="input-short" />
+                </div>
+                <div id="assignment-col-container">
+
+                </div>
+            </div>
+            <div id="lab-row" class="categories-row mg-t-10">
+                <div class="long-col">
+                    <label class="fw-600 fs-18">Lab number</label>
+                    <input type="text" id="lab-number" onchange="renderLabInputs()" class="input-short" />
+                </div>
+                <div id="lab-col-container" class="col-container">
+                    <div class="width-50" id="lab-col-1">
+
+                    </div>
+                    <div class="width-50" id="lab-col-2">
+
+                    </div>
+                </div>
+            </div>
+            <div id="participation-row" class="categories-row mg-t-10">
+                <div class="long-col">
+                    <label class="fw-600 fs-18">Participation</label>
+                    <input type="text" id="participation-percentage" class="input-short" onchange="removeWarning('participation')" />
+                    <span>/100%</span>
+                </div>
+            </div>
+            <div class="mg-t-40">
+                <div class="title">
+                    <span class="fs-12 fw-600">Please fill input forms carefully, otherwise you may get invalid results!</span>
+                </div>
+                <button class="btn-submit" onclick="calculateGpa()">SUBMIT</button>
+            </div>
+            <div class="categories-row" id="result-row">
+                <hr />
+                <span class="fw-600">Percentage:</span>
+                <span id="total-percentage-container"></span><br />
+                <span class="fw-600">Grade:</span>
+                <span id="grade-container"></span><br />
+                <span class="fw-600">GPA:</span>
+                <span id="gpa-container"></span>
                 <br />
-            </div>
-            <div class="mid-exams-container">
-                <!--Data from jquery-->
+                <div class="mg-b-20">Note that this is not your final grade! You must take into account curve!</div>
             </div>
         </div>
-        <div class="weekly-quizzes-calculator margin-t-20">
-            <div>
-                <span class="bold">Weekly quizzes</span>
-            </div>
-            <div class="margin-b-5">
-                <span>Total number of Weekly quizzes</span>
-                <input onchange="handleWeeklyQuizNumberChange(this)" type="text" id="weekly-quiz-number" class="short-input" />
-                <span id="quiz-number-alert" class="alert">This field is required</span><br />
-            </div>
-            <div class="weekly-quizzes-container">
-
-            </div>
-        </div>
-        <div class="category-items">
-
-        </div>
-        <button id="calc-gpa-btn" onclick="calculateGpa()">Calculate GPA</button>
-
-
     </div>
+</div>
 

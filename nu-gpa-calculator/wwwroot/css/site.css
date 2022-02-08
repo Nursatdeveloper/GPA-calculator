@@ -1,339 +1,450 @@
-﻿.header {
-    position: fixed;
-    z-index: 3;
-    right: 0;
-    left: 0;
-    top: 0;
-    height: 60px;
-    background-color: white;
-    -webkit-box-shadow: 0px 5px 8px -2px rgba(34, 60, 80, 0.2);
-    -moz-box-shadow: 0px 5px 8px -2px rgba(34, 60, 80, 0.2);
-    box-shadow: 0px 5px 8px -2px rgba(34, 60, 80, 0.2);
+﻿.main-container {
+    position: relative;
 }
 
-.header-wrapper {
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
+#header-container {
+    height: 60px;
+    background-color: #0047b3;
+    color: #d9d9d9;
+    padding-top: 13px;
 }
 
 #header-text {
-    font-size: 22px;
-    font-weight: 600;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Verdana', 'sans-serif';
-    color: #4d4d4d;
-}
-
-.container {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Verdana', 'sans-serif';
-    margin-top: 100px;
+    width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
 }
 
-.bold {
-    font-weight: 600;
-    color: #4d4d4d;
+#body-container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
 }
 
-.add-course-component {
-    margin-top: 30px;
-}
-
-.add-course-form {
-    position: relative;
+#add-course-component {
     width: 100%;
-}
-
-#source-code-link {
-    position: absolute;
-    right: 10px;
-    font-size: 14px;
-}
-
-.course-list-component {
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 20px;
+}
+
+#add-course-input-wrapper {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#course-list-component {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding-top: 10px;
 }
 
 .course-list-item {
-    border: 1px solid gray;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
     display: flex;
-    width: 93%;
-    padding: 7px;
-    margin-top: 5px;
-    background-color: #cccccc;
+    justify-content: space-between;
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #b3b3b3;
+    background-color: #f2f2f2;
+}
+
+.course-list-item-left {
+    margin-left: 5px;
+}
+
+.course-list-item-right {
+    margin-right: 10px;
+}
+
+    .course-list-item-right button {
+        margin-left: 10px;
+    }
+
+#gpa-calculator-form-component {
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    border: 1px solid #b3b3b3;
+    padding-top: 10px;
+    margin-bottom:100px;
+}
+
+.grading-categories-item {
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 5px;
+}
+
+#course-name-wrapper {
+    border-bottom: 1px solid #b3b3b3;
+}
+
+#grading-categories-weight {
+    display: flex;
+}
+
+#grading-categories {
+    width: 70%;
+}
+
+#grading-categories-options {
+    width: 30%;
+}
+
+
+.error-message-container {
+    border: 1px solid red;
+    background-color: #ff9999;
+    color: #4d4d4d;
+    border-radius: 3px;
+    padding: 5px;
     position: relative;
 }
 
-.course-list-item-number {
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.course-list-item-name {
-    width: fit-content;
-}
-
-.course-list-item-options {
-    width: fit-content;
+.close-icon {
     position: absolute;
     right: 10px;
-    display: flex;
-}
-
-.remove-btn {
-    margin-left: 30px;
-}
-
-    .remove-btn:hover {
-        background-color: red;
-        color: white;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-
-.gpa-calculator-component {
-    margin-top: 30px;
-    border: 1px solid gray;
-    width: 93%;
-    padding: 7px;
-    margin-bottom: 100px;
-}
-
-.gpa-calculator-header {
-    padding: 5px;
-    position: relative;
-}
-
-.gpa-calculator-body {
-    padding: 5px;
-}
-
-.gpa-calculator-section {
-    font-size: 14px;
-    position: relative;
-    width: 270px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    margin-left: 10px;
-}
-
-    .gpa-calculator-section input {
-        width: 50px;
-        position: absolute;
-        right: 35px;
-    }
-
-    .gpa-calculator-section span {
-        position: absolute;
-        right: 0;
-        top: 3px;
-        cursor: pointer;
-    }
-
-        .gpa-calculator-section span svg:hover {
-            color: red;
-        }
-
-#add-new-category-input {
-    width: 100px;
-}
-
-.add-new-category-btn span {
-    font-size: 14px;
-    font-weight: 600;
-    margin-left: 10px;
-}
-.add-new-category-btn{
-    margin-top:20px;
-    margin-bottom:20px;
-}
-.add-category-btn{
-    width:30%;
-    margin-left:15px;
-    height:30px;
-}
-
-.short-input {
-    width: 50px;
-}
-
-.margin-b-5 {
-    margin-bottom: 5px;
-}
-
-.mid-exam-item {
-    margin-left: 10px;
-}
-
-.alert-message {
-    background-color: #ff6666;
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    width: 290px;
-    font-size: 12px;
-    border-radius: 5px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    position: relative;
-}
-
-    .alert-message svg {
-        position: absolute;
-        right: 10px;
-    }
-
-        .alert-message svg:hover {
-            color: white;
-            cursor: pointer;
-        }
-
-.row {
-    display: flex;
-    width: fit-content;
-    font-size: 16px;
-}
-
-.col-long {
-    width: 180px;
-    padding-left: 40px;
-}
-
-.col-short {
-    padding-left: 20px;
-}
-
-.mid-exam-wrapper {
-    display: flex;
-}
-
-.mid-exam-checkbox-container {
-    margin-left: 30px;
-}
-
-    .mid-exam-checkbox-container input {
-        width: 20px;
-    }
-
-.input-tiny {
     width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
-.quiz-drop {
-    margin-left: 45px;
+.info-icon-container {
+    margin-left: 15px;
 }
 
-.lab-checkbox-container {
-    margin-left: 60px;
+.info-icon {
+    width: 20px;
+    height: 20px;
+    color: #0047b3;
+    cursor: pointer;
+    margin-bottom: 5px;
 }
 
-.lab-checkbox-header {
-    margin-left: -45px;
+.delete-icon {
+    width: 20px;
+    height: 20px;
+    color: #0047b3;
+    cursor: pointer;
+    margin-bottom: 5px;
 }
 
-.assignment-checkbox-header {
+    .delete-icon:hover {
+        color: #ff3333;
+    }
+
+.title {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.square-red {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    background-color: red;
+}
+
+.grading-categories-row {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.long-col {
+    width: 45%;
+}
+
+.short-col {
+    margin-right: 10px;
+}
+
+.col-container {
+    display: flex;
+    justify-content: space-between;
+    width: 55%
+}
+
+.categories-row {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#quiz-col-container {
+    width: 100%;
+}
+
+#lab-col-container {
+    width: 100%;
+}
+
+.pos-rel {
+    position: relative;
+}
+
+.category-checkbox {
+    position: absolute;
+    margin-top: 9px;
+    margin-left: 5px;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.width-40vw {
+    width: 40vw;
+}
+
+.width-50 {
+    width: 50%;
+}
+
+.width-70 {
+    width: 70%;
+}
+
+.width-30 {
+    width: 30%;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.width-f-cont {
+    width: fit-content;
+}
+
+.mg-l-10 {
     margin-left: 10px;
 }
 
-.margin-t-20 {
+.mg-l-15 {
+    margin-left: 15px;
+}
+
+.mg-l-20 {
+    margin-left: 20px;
+}
+
+.mg-t-20 {
     margin-top: 20px;
 }
 
-.font-s-14 {
+.mg-t-40 {
+    margin-top: 20px;
+}
+
+.mg-t-10 {
+    margin-top: 10px;
+}
+.mg-b-20{
+    margin-bottom:20px;
+}
+
+.pd-5 {
+    padding: 5px;
+}
+
+/* INPUT STYLES */
+.input-wrapper {
+    margin-top: 7px;
+    margin-bottom: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    width: fit-content;
+}
+
+.input-short {
+    width: 30px;
+    height: 25px;
+}
+
+.input-small {
+    width: 25px;
+    height: 20px;
+    font-size: 13px;
+}
+
+
+
+
+/* FONT RELATED CLASSES */
+
+/*
+    fw - font-weight
+    fs - font-size
+*/
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+.fs-10 {
+    font-size: 10px;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+.fs-14 {
     font-size: 14px;
 }
 
-#calc-gpa-btn {
-    right:10px;
-    height:35px;
-    background-color: #0033cc;
-    color:white;
-    border-radius: 3px;
-    margin-top:20px;
-    display: block;
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom:20px;
-    width:80%;
-    font-size:16px;
+.fs-16 {
+    font-size: 16px;
 }
 
-    #calc-gpa-btn:hover {
-        background-color: #002699;
-        cursor: pointer;
-        border-radius: 3px;
-    }
-
-.display-none {
-    display: none;
+.fs-18 {
+    font-size: 18px;
+    color: #4d4d4d;
 }
 
-.alert {
-    width: fit-content;
-    background-color: #ff6666;
-    font-size: 12px;
-    border-radius: 5px;
-    padding: 5px;
-}
-#reset-btn {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    background-color: #2eb82e;
-    height: 30px;
-    display: block;
-    margin-left:auto;
-    margin-right:auto;
-    width:80%;
+/* BUTTON STYLES */
+
+.btn-main {
+    border: 0;
+    background-color: #0047b3;
     color: white;
-    border-radius: 3px;
-}
-    #reset-btn:hover {
-        background-color: #248f24;
-        border-radius: 3px;
-    }
-.total-information{
-    margin-left:10px;
-}
-#footer-item{
-    width:fit-content;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:10px;
-}
-    #footer-item a {
-        color: #4d4d4d;
-    }
-.footer {
-    position: fixed;
-    height: 40px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    background-color: white;
-    -webkit-box-shadow: 0px -4px 8px 0px rgba(34, 60, 80, 0.2);
-    -moz-box-shadow: 0px -4px 8px 0px rgba(34, 60, 80, 0.2);
-    box-shadow: 0px -4px 8px 0px rgba(34, 60, 80, 0.2);
-}
-.form-checkbox{
-    height:15px;
-    width:15px;
-    margin-top:3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-@media screen and (max-width: 1000px) {
-    .container {
-        width: 90%; 
+    .btn-main:hover {
+        background-color: #003d99;
+    }
+
+.btn-delete {
+    border: 0;
+    background-color: #ff3333;
+    color: white;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .btn-delete:hover {
+        background-color: #cc0000;
+    }
+
+.btn-none {
+    border: 0;
+    background-color: white;
+}
+
+.btn-category {
+    width: 90%;
+    border: 1px solid #0047b3;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 5px;
+    color: #0047b3;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .btn-category:hover {
+        background-color: #0047b3;
+        font-family: 600;
+        color: white;
+    }
+
+.btn-submit {
+    width: 90%;
+    border: 1px solid orangered;
+    background-color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: orangered;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .btn-submit:hover {
+        background-color: orangered;
+        font-family: 600;
+        color: white;
+    }
+
+@media only screen and (max-width:1140px) {
+    .grading-categories-row {
+        display: block;
+    }
+
+    .col-container {
+        width: 100%;
+    }
+
+    .long-col {
+        width: 100%;
     }
 }
-@media screen and (max-width: 800px) {
-    .add-category-btn{
+
+@media only screen and (max-width: 800px) {
+    #body-container {
+        border: 2px solid black;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .course-list-item {
+        width: 90%;
+    }
+
+    #gpa-calculator-form-component {
+        width: 90%;
+    }
+
+    #grading-categories-weight {
         display: block;
-        width:80%;
-        margin-left:auto;
-        margin-right:auto;
-        margin-top:10px;
+    }
+
+    #grading-categories {
+        width: 100%;
+        margin-bottom: 50px;
+    }
+
+    #grading-categories-options {
+        width: 100%;
     }
 }
