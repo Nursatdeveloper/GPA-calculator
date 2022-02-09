@@ -22,6 +22,10 @@ namespace nu_gpa_calculator.Controllers
         {
             return View();
         }
+        public IActionResult Manual()
+        {
+            return View();
+        }
         [HttpPost]
         public JsonResult CalculateGpa(int percentage)
         {

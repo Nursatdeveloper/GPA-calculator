@@ -15629,6 +15629,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\Nursat\\Portfolio\\.NET-projects\\NU_Gpa_calculator\\nu-gpa-calculator\\nu-gpa-calculator\\Views\\Home\\Manual.cshtml",
+      "TargetPath": "Views\\Home\\Manual.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\Nursat\\Portfolio\\.NET-projects\\NU_Gpa_calculator\\nu-gpa-calculator\\nu-gpa-calculator\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
